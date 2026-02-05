@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For Ridhima ❤️</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --glass: rgba(255,255,255,.10);
+      --stroke: rgba(255,255,255,.18);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --accent: #ff2d55;
+      --accent2:#b84cff;
+      --good:#19c37d;
+      --bad:#ff5a5f;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color:var(--text);
+      overflow-x:hidden;
+      background:#050507;
+    }
+
+    /* FULLSCREEN VIDEO BACKGROUND */
+    .bg-video{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      z-index:-3;
+      filter: contrast(1.05) saturate(1.1) brightness(0.75);
+    }
+    .bg-overlay{
+      position:fixed; inset:0;
+      z-index:-2;
+      background:
+        radial-gradient(1200px 700px at 10% 15%, rgba(184,76,255,.25), transparent 60%),
+        radial-gradient(900px 600px at 85% 20%, rgba(255,45,85,.22), transparent 55%),
+        linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.75));
+    }
+    .noise{
+      pointer-events:none;
+      position:fixed; inset:0;
+      z-index:-1;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+      opacity:.22;
+      mix-blend-mode:overlay;
+    }
+
+    .wrap{
+      max-width:1040px;
+      margin:0 auto;
+      padding:28px 18px 70px;
+    }
+    .topbar{
+      display:flex;
+      gap:12px;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:18px;
+      flex-wrap:wrap;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border:1px solid var(--stroke);
+      background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+      border-radius:999px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,.25);
+      font-size:13px;
+      color:var(--muted);
+    }
+    .badge b{ color: var(--text); font-weight:600; }
+    .controls{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+
+    .btn{
+      border:1px solid var(--stroke);
+      background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
+      color:var(--text);
+      padding:10px 14px;
+      border-radius:14px;
+      cursor:pointer;
+      backdrop-filter: blur(10px);
+      transition:.2s transform, .2s opacity, .2s border-color;
+      font-weight:600;
+      font-size:13px;
+      letter-spacing:.2px;
+    }
+    .btn:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,.32); }
+    .btn.primary{
+      border-color: rgba(255,45,85,.55);
+      background: linear-gradient(135deg, rgba(255,45,85,.35), rgba(184,76,255,.22));
+    }
+    .btn.good{
+      border-color: rgba(25,195,125,.6);
+      background: linear-gradient(135deg, rgba(25,195,125,.25), rgba(255,255,255,.06));
+    }
+    .btn.bad{
+      border-color: rgba(255,90,95,.6);
+      background: linear-gradient(135deg, rgba(255,90,95,.22), rgba(255,255,255,.06));
+    }
+
+    .hero{
+      border:1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+      border-radius:26px;
+      padding:26px 18px 18px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 30px 80px rgba(0,0,0,.40);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+    }
+    @media (max-width: 920px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    h1{
+      font-family:"Playfair Display", serif;
+      font-size:44px;
+      margin:10px 0 6px;
+      letter-spacing:.2px;
+    }
+    .sub{
+      color:var(--muted);
+      margin:0 0 16px;
+      line-height:1.6;
+      font-size:15px;
+    }
+
+    .quote{
+      margin-top:14px;
+      padding:14px 16px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.22);
+      color: rgba(255,255,255,.90);
+      line-height:1.75;
+      font-size:15px;
+    }
+    .sig{
+      margin-top:10px;
+      color: rgba(255,255,255,.85);
+      font-weight:600;
+      letter-spacing:.3px;
+    }
+
+    .slideshow{
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.25);
+      overflow:hidden;
+      position:relative;
+      min-height:340px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.35);
+    }
+    .slide{
+      position:absolute; inset:0;
+      opacity:0;
+      transform: scale(1.03);
+      transition: opacity .9s ease, transform 1.2s ease;
+      background-size: cover;
+      background-position:center;
+      filter: contrast(1.05) saturate(1.08);
+    }
+    .slide.active{ opacity:1; transform: scale(1); }
+    .shade{
+      position:absolute; inset:0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.35)),
+        radial-gradient(700px 380px at 50% 0%, transparent, rgba(0,0,0,.45));
+      pointer-events:none;
+    }
+    .slide-ui{
+      position:absolute;
+      left:12px; right:12px; bottom:12px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
+    .dots{ display:flex; gap:7px; flex-wrap:wrap; }
+    .dot{
+      width:9px; height:9px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.35);
+      background: rgba(255,255,255,.12);
+      opacity:.75;
+      cursor:pointer;
+      transition:.2s transform, .2s opacity, .2s background;
+    }
+    .dot.active{ background: rgba(255,45,85,.65); border-color: rgba(255,45,85,.8); opacity:1; transform:scale(1.15); }
+    .caption{
+      font-size:12px;
+      color: rgba(255,255,255,.82);
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.18);
+      backdrop-filter: blur(10px);
+      max-width:65%;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .ask{
+      margin-top:16px;
+      padding:16px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+    }
+    .ask h2{
+      margin:0 0 8px;
+      font-family:"Playfair Display", serif;
+      font-size:26px;
+    }
+    .ask p{ margin:0 0 12px; color: var(--muted); line-height:1.6; font-size:14px; }
+    .row{ display:flex; gap:10px; flex-wrap:wrap; }
+
+    .result{
+      margin-top:12px;
+      padding:12px 14px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.16);
+      color: rgba(255,255,255,.88);
+      line-height:1.7;
+      display:none;
+    }
+    .result.show{ display:block; }
+
+    /* Hearts */
+    .float-layer{ position:fixed; inset:0; pointer-events:none; overflow:hidden; }
+    .float-heart{
+      position:absolute;
+      font-size:18px;
+      opacity:0;
+      animation: drift 10s linear infinite;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.4));
+    }
+    @keyframes drift{
+      0%{ transform:translateY(110vh) translateX(0) scale(.8); opacity:0;}
+      10%{opacity:.45}
+      70%{opacity:.35}
+      100%{ transform:translateY(-20vh) translateX(60px) scale(1.15); opacity:0;}
+    }
+
+    /* Password Gate */
+    .gate{
+      position:fixed; inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      background: rgba(0,0,0,.65);
+      z-index:50;
+    }
+    .gate-card{
+      width:min(560px, 100%);
+      border-radius:26px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.07);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 40px 120px rgba(0,0,0,.55);
+      padding:22px 18px 18px;
+    }
+    .gate-card h1{
+      font-family:"Playfair Display", serif;
+      font-size:34px;
+      margin:8px 0 6px;
+    }
+    .gate-card p{ margin:0 0 14px; color: var(--muted); line-height:1.6; font-size:14px; }
+    .gate-card input{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.25);
+      color: var(--text);
+      outline:none;
+      font-size:14px;
+    }
+    .gate-actions{ margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; }
+  </style>
+</head>
+
+<body>
+  <!-- Background Video -->
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="WhatsApp Video 2026-02-05 at 8.10.11 PM.mp4" type="video/mp4">
+  </video>
+  <div class="bg-overlay"></div>
+  <div class="noise"></div>
+  <div class="float-layer" id="floatLayer"></div>
+
+  <!-- Password Gate -->
+  <div class="gate" id="gate">
+    <div class="gate-card" id="gateCard">
+      <div class="badge">🔒 Private Page · <b>For Ridhima</b></div>
+      <h1>bbay… one sec 😭❤️</h1>
+      <p>enter the password to open your surprise 💘</p>
+
+      <!-- change password here -->
+      <input id="pw" placeholder="Password…" autocomplete="off" />
+
+      <div class="gate-actions">
+        <button class="btn primary" id="unlockBtn">Unlock 💗</button>
+        <button class="btn" id="musicBtn">🎧 Music: Off</button>
+      </div>
+
+      <p class="sub" style="margin-top:10px;">
+        if music doesn’t play, just tap the music button once 😭
+      </p>
+    </div>
+  </div>
+
+  <div class="wrap" id="main" style="display:none;">
+    <div class="topbar">
+      <div class="badge">💌 Valentine Special · Made for <b>Ridhima</b></div>
+
+      <div class="controls">
+        <button class="btn" id="nextBtn">🖼️ Next</button>
+        <button class="btn primary" id="heartsBtn">❤️ More hearts</button>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="grid">
+        <div>
+          <h1>Ridhima ❤️</h1>
+          <p class="sub">
+            i made this lil thing just for u bbay…  
+            not perfect but it’s from my heart fr 😭💘
+          </p>
+
+          <div class="quote">
+            idk how to explain this properly bbay 😭  
+            but every time i see u my heart just goes soft fr.  
+            u don’t even try and u still steal my whole attention 😭❤️  
+            <br><br>
+            u’re my fav thought in the middle of the day,  
+            my calm when everything feels messy,  
+            and lowkey my biggest blessing fr 🫶  
+            <br><br>
+            i made this lil page just for u…  
+            not perfect, not fancy,  
+            but real — like how i feel about u 🥺💘  
+            <br><br>
+            happy valentine my pretty girl 🌹  
+            always you. always us.
+          </div>
+
+          <div class="sig">— urs, always 🤍</div>
+
+          <div class="ask">
+            <h2>Will you be my Valentine?</h2>
+            <p>say yes bby pls 😭💘 (no button is not safe)</p>
+            <div class="row">
+              <button class="btn good" id="yesBtn">Yes 😳❤️</button>
+              <button class="btn bad" id="noBtn">No 🙄</button>
+            </div>
+            <div class="result" id="resultBox"></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="slideshow" id="slideshow">
+            <div class="slide active" style="background-image:url('WhatsApp Image 2026-02-05 at 8.10.11 PM.jpeg')"></div>
+            <div class="slide" style="background-image:url('WhatsApp Image 2026-02-05 at 8.10.12 PM.jpeg')"></div>
+            <div class="slide" style="background-image:url('WhatsApp Image 2026-02-05 at 8.10.13 PM.jpeg')"></div>
+            <div class="slide" style="background-image:url('WhatsApp Image 2026-02-05 at 8.10.14 PM.jpeg')"></div>
+            <div class="shade"></div>
+
+            <div class="slide-ui">
+              <div class="dots" id="dots"></div>
+              <div class="caption" id="caption">my pretty girl fr 😭❤️</div>
+            </div>
+          </div>
+
+          <p class="sub" style="margin-top:12px;">
+            tip: tap music button if it don’t autoplay (browser thing) 😭
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Music (upload these mp3s to your repo) -->
+  <audio id="song" loop preload="auto">
+    <source src="first-song.mp3" type="audio/mpeg">
+    <source src="golden-brown.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // CHANGE PASSWORD HERE
+    const PASSWORD = "ridhima"; // put your secret word (example: nickname)
+
+    const gate = document.getElementById("gate");
+    const main = document.getElementById("main");
+    const pw = document.getElementById("pw");
+    const unlockBtn = document.getElementById("unlockBtn");
+
+    const song = document.getElementById("song");
+    const musicBtn = document.getElementById("musicBtn");
+    let musicOn = false;
+
+    async function tryPlay(){
+      try{
+        await song.play();
+        musicOn = true;
+        musicBtn.textContent = "🎧 Music: On";
+      }catch(err){
+        musicOn = false;
+        musicBtn.textContent = "🎧 Music: Tap to Play";
+      }
+    }
+
+    musicBtn.addEventListener("click", async ()=>{
+      if(!musicOn){
+        try{
+          await song.play();
+          musicOn = true;
+          musicBtn.textContent = "🎧 Music: On";
+        }catch(e){
+          musicBtn.textContent = "🎧 Music: Can’t autoplay";
+        }
+      } else {
+        song.pause();
+        musicOn = false;
+        musicBtn.textContent = "🎧 Music: Off";
+      }
+    });
+
+    function unlock(){
+      const val = (pw.value || "").trim().toLowerCase();
+      if(val === PASSWORD.toLowerCase()){
+        gate.style.display = "none";
+        main.style.display = "block";
+        spawnHearts(18);
+        tryPlay();
+      } else {
+        pw.value = "";
+        pw.placeholder = "wrong 😭 try again";
+      }
+    }
+    unlockBtn.addEventListener("click", unlock);
+    pw.addEventListener("keydown", (e)=>{ if(e.key==="Enter") unlock(); });
+
+    // slideshow
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const dotsWrap = document.getElementById("dots");
+    const caption = document.getElementById("caption");
+    const nextBtn = document.getElementById("nextBtn");
+
+    const captions = [
+      "u look too pretty wth 😭❤️",
+      "my fav face in this world fr 💘",
+      "i’m lucky asf 😭🫶",
+      "happy valentine bbay 🌹"
+    ];
+
+    let idx = 0;
+    slides.forEach((_, i)=>{
+      const d = document.createElement("div");
+      d.className = "dot" + (i===0 ? " active" : "");
+      d.addEventListener("click", ()=>goTo(i));
+      dotsWrap.appendChild(d);
+    });
+    const dots = Array.from(document.querySelectorAll(".dot"));
+
+    function goTo(i){
+      slides[idx].classList.remove("active");
+      dots[idx].classList.remove("active");
+
+      idx = (i + slides.length) % slides.length;
+
+      slides[idx].classList.add("active");
+      dots[idx].classList.add("active");
+      caption.textContent = captions[idx] || "❤️";
+    }
+    function next(){ goTo(idx+1); }
+    nextBtn.addEventListener("click", next);
+    setInterval(()=>{ next(); }, 6000);
+
+    // valentine buttons
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const resultBox = document.getElementById("resultBox");
+    let noCount = 0;
+
+    yesBtn.addEventListener("click", ()=>{
+      resultBox.classList.add("show");
+      resultBox.innerHTML = "YESS?? 😭❤️ okay listen… u just made me the happiest fr.<br><br><b>Happy Valentine’s Day bbay 💘</b>";
+      spawnHearts(24);
+    });
+
+    noBtn.addEventListener("mouseenter", ()=>{
+      const x = (Math.random()*240) - 120;
+      const y = (Math.random()*120) - 60;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+    noBtn.addEventListener("click", ()=>{
+      noCount++;
+      resultBox.classList.add("show");
+      if(noCount < 3){
+        resultBox.textContent = "nahhh try again 😭❤️";
+      } else {
+        resultBox.textContent = "okay stop playing 😤💘 click YES";
+      }
+    });
+
+    // hearts
+    const floatLayer = document.getElementById("floatLayer");
+    const heartsBtn = document.getElementById("heartsBtn");
+
+    function spawnHearts(n=12){
+      for(let i=0;i<n;i++){
+        const h = document.createElement("div");
+        h.className = "float-heart";
+        h.textContent = (Math.random() > 0.25) ? "❤️" : "💘";
+        h.style.left = Math.random()*100 + "vw";
+        h.style.animationDuration = (8 + Math.random()*7) + "s";
+        h.style.animationDelay = (Math.random()*1.5) + "s";
+        h.style.fontSize = (14 + Math.random()*20) + "px";
+        floatLayer.appendChild(h);
+        setTimeout(()=>{ h.remove(); }, 16000);
+      }
+    }
+    heartsBtn.addEventListener("click", ()=>spawnHearts(18));
+  </script>
+</body>
+</html>
