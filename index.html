@@ -433,7 +433,7 @@
     musicBtn.addEventListener("click", async ()=>{
       if(!musicOn){
         try{
-          await song.play();
+          await song.play(golden-brown.mp3);
           musicOn = true;
           musicBtn.textContent = "🎧 Music: On";
         }catch(e){
